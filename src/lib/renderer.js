@@ -47,7 +47,7 @@ export function drawFrame(ctx, width, height, progress, settings, bgImageEl, pre
   // 4. Font size (auto or manual)
   let fontSize = settings.fontSize;
   if (fontSize === 0) {
-    fontSize = height * 0.4;
+    fontSize = height * 0.28;
     ctx.font = `bold ${fontSize}px "${settings.fontFamily}"`;
     while (ctx.measureText(text).width > width * 0.85 && fontSize > 10) {
       fontSize -= 2;
@@ -66,7 +66,7 @@ export function drawFrame(ctx, width, height, progress, settings, bgImageEl, pre
   const showIcon = settings.prefixIcon === 'tiktok-play' && prefixIconEl;
 
   if (showIcon) {
-    const iconSize = fontSize * 0.9;
+    const iconSize = fontSize * 1.15;
     const gap = fontSize * 0.08;
     const cy = height / 2;
 
