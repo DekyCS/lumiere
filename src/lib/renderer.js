@@ -8,8 +8,9 @@ import { EASING_FUNCTIONS } from './easing';
  * @param {number} progress - 0 to 1
  * @param {object} settings
  * @param {HTMLImageElement|null} bgImageEl - pre-loaded background image element
+ * @param {HTMLImageElement|null} prefixIconEl - pre-loaded prefix icon element
  */
-export function drawFrame(ctx, width, height, progress, settings, bgImageEl) {
+export function drawFrame(ctx, width, height, progress, settings, bgImageEl, prefixIconEl) {
   const easingEntry = EASING_FUNCTIONS[settings.easing] || EASING_FUNCTIONS.easeOut;
   const easedProgress = easingEntry.fn(progress);
 
@@ -56,11 +57,44 @@ export function drawFrame(ctx, width, height, progress, settings, bgImageEl) {
     ctx.font = `bold ${fontSize}px "${settings.fontFamily}"`;
   }
 
-  // 5. Draw text centered
+  // 5. Draw text (and optional prefix icon) centered
   ctx.save();
   ctx.fillStyle = settings.textColor;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(text, width / 2, height / 2);
+
+  const showIcon = settings.prefixIcon === 'tiktok-play' && prefixIconEl;
+
+  if (showIcon) {
+    const iconSize = fontSize * 0.9;
+    const gap = fontSize * 0.08;
+    const cy = height / 2;
+
+    // Use the END number text to calculate a stable layout that won't shift
+    const endText =
+      settings.prefix + settings.endNumber.toFixed(settings.decimals) + settings.suffix;
+    const stableWidth = ctx.measureText(endText).width;
+    const totalWidth = iconSize + gap + stableWidth;
+    const startX = (width - totalWidth) / 2;
+
+    // Measure once with the end text to get stable font metrics
+    const endMetrics = ctx.measureText(endText);
+    const ascent = endMetrics.actualBoundingBoxAscent || fontSize * 0.7;
+    const descent = endMetrics.actualBoundingBoxDescent || fontSize * 0.1;
+    const glyphCenter = cy - (ascent - descent) / 2;
+
+    // Fixed icon position — never changes between frames
+    const iconX = Math.round(startX);
+    const iconY = Math.round(glyphCenter - iconSize / 2);
+    const textX = Math.round(startX + iconSize + gap);
+
+    ctx.drawImage(prefixIconEl, iconX, iconY, iconSize, iconSize);
+
+    ctx.textAlign = 'left';
+    ctx.fillText(text, textX, cy);
+  } else {
+    ctx.fillText(text, width / 2, height / 2);
+  }
+
   ctx.restore();
 }

@@ -14,7 +14,8 @@ const DEFAULT_SETTINGS = {
   easing: 'easeOut',
   textColor: '#ffffff',
   fontSize: 0, // 0 = auto
-  fontFamily: 'Bebas Neue',
+  fontFamily: 'Poppins',
+  prefixIcon: 'none', // 'none' | 'tiktok-play'
   bgColor: '#000000',
   bgImage: null,
   canvasWidth: 1920,

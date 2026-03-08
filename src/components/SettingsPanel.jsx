@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Hash, Zap, Palette, Upload, X, Image as ImageIcon } from 'lucide-react';
+import { Hash, Zap, Palette, Upload, X, Image as ImageIcon, Play } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -244,6 +244,31 @@ export default function SettingsPanel({ settings, onChange }) {
                   />
                 </FormField>
               </div>
+              <FormField label="Icon Prefix">
+                <button
+                  onClick={() =>
+                    update(
+                      'prefixIcon',
+                      settings.prefixIcon === 'tiktok-play' ? 'none' : 'tiktok-play'
+                    )
+                  }
+                  className={`flex items-center gap-2.5 w-full h-10 px-3 rounded-lg border transition-all duration-200 cursor-pointer ${
+                    settings.prefixIcon === 'tiktok-play'
+                      ? 'border-[#C8492A] bg-[#FDF0EC] text-[#C8492A]'
+                      : 'border-[#E2DAD0] bg-[#F8F4ED] text-[#A9A29A] hover:border-[#C8492A]/40'
+                  }`}
+                >
+                  <Play size={14} fill="currentColor" />
+                  <span className="text-[12px] font-semibold">TikTok Views</span>
+                  <span
+                    className={`ml-auto text-[10px] font-bold uppercase tracking-wider ${
+                      settings.prefixIcon === 'tiktok-play' ? 'text-[#C8492A]' : 'text-[#C5BFB5]'
+                    }`}
+                  >
+                    {settings.prefixIcon === 'tiktok-play' ? 'ON' : 'OFF'}
+                  </span>
+                </button>
+              </FormField>
               <FormField label="Decimal Places">
                 <SegmentedControl
                   value={settings.decimals}

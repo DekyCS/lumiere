@@ -9,7 +9,7 @@ import { drawFrame } from './renderer';
  * @param {function} onProgress - callback(0..1)
  * @returns {Promise<void>}
  */
-export async function exportMP4(canvas, settings, bgImageEl, onProgress) {
+export async function exportMP4(canvas, settings, bgImageEl, onProgress, prefixIconEl) {
   const width = settings.canvasWidth;
   const height = settings.canvasHeight;
   const fps = settings.fps;
@@ -51,7 +51,7 @@ export async function exportMP4(canvas, settings, bgImageEl, onProgress) {
 
   for (let i = 0; i < totalFrames; i++) {
     const progress = totalFrames <= 1 ? 1 : i / (totalFrames - 1);
-    drawFrame(ctx, width, height, progress, settings, bgImageEl);
+    drawFrame(ctx, width, height, progress, settings, bgImageEl, prefixIconEl);
 
     const frame = new VideoFrame(canvas, {
       timestamp: (i * 1_000_000) / fps,

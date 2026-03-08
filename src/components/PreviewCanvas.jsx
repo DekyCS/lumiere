@@ -9,6 +9,19 @@ export default function PreviewCanvas({ settings }) {
   const animFrameRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [bgImageEl, setBgImageEl] = useState(null);
+  const [prefixIconEl, setPrefixIconEl] = useState(null);
+
+  // Load prefix icon SVG
+  useEffect(() => {
+    if (settings.prefixIcon === 'none') {
+      setPrefixIconEl(null);
+      return;
+    }
+    const img = new Image();
+    img.onload = () => setPrefixIconEl(img);
+    img.onerror = () => setPrefixIconEl(null);
+    img.src = '/triangle.svg';
+  }, [settings.prefixIcon]);
 
   // Load background image when settings.bgImage changes
   useEffect(() => {
@@ -38,8 +51,8 @@ export default function PreviewCanvas({ settings }) {
     canvas.width = settings.canvasWidth;
     canvas.height = settings.canvasHeight;
     const ctx = canvas.getContext('2d');
-    drawFrame(ctx, settings.canvasWidth, settings.canvasHeight, 0, settings, bgImageEl);
-  }, [settings, bgImageEl, playing]);
+    drawFrame(ctx, settings.canvasWidth, settings.canvasHeight, 0, settings, bgImageEl, prefixIconEl);
+  }, [settings, bgImageEl, prefixIconEl, playing]);
 
   // Play animation
   const handlePlay = useCallback(() => {
@@ -55,7 +68,7 @@ export default function PreviewCanvas({ settings }) {
     const animate = (now) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / durationMs, 1);
-      drawFrame(ctx, settings.canvasWidth, settings.canvasHeight, progress, settings, bgImageEl);
+      drawFrame(ctx, settings.canvasWidth, settings.canvasHeight, progress, settings, bgImageEl, prefixIconEl);
 
       if (progress < 1) {
         animFrameRef.current = requestAnimationFrame(animate);
@@ -65,7 +78,7 @@ export default function PreviewCanvas({ settings }) {
     };
 
     animFrameRef.current = requestAnimationFrame(animate);
-  }, [settings, bgImageEl, playing]);
+  }, [settings, bgImageEl, prefixIconEl, playing]);
 
   // Cleanup animation on unmount
   useEffect(() => {
@@ -77,9 +90,9 @@ export default function PreviewCanvas({ settings }) {
   const handleExport = useCallback(
     async (onProgress) => {
       const canvas = canvasRef.current;
-      await exportMP4(canvas, settings, bgImageEl, onProgress);
+      await exportMP4(canvas, settings, bgImageEl, onProgress, prefixIconEl);
     },
-    [settings, bgImageEl]
+    [settings, bgImageEl, prefixIconEl]
   );
 
   const aspectRatio = settings.canvasWidth / settings.canvasHeight;
