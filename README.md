@@ -1,16 +1,39 @@
-# React + Vite
+# Lumière — Counter Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek number counter animation generator. Configure animated counters with custom styling, easing curves, and export them as MP4 videos — all in the browser.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Animated number counters** — set start/end values, prefix, suffix, and decimal precision
+- **Multiple easing functions** — Linear, Ease In/Out, Overshoot, Bounce, Elastic with live curve preview
+- **Full styling control** — custom fonts, colors, font size, background images, and canvas resolution
+- **MP4 export** — render animations using WebCodecs + mp4-muxer, no server required
+- **Live preview** — instant canvas preview with real-time playback
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** + **Vite**
+- **Tailwind CSS v4** + **shadcn/ui**
+- **WebCodecs API** + **mp4-muxer** for client-side video encoding
+- **Canvas API** for rendering
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+## Deployment
+
+Deploy to Vercel, Netlify, or any static host. Vite is auto-detected — no extra configuration needed.
+
+## Author
+
+Made by [Omar Lahlou Mimi](https://omarlahloumimi.com)
