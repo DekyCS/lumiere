@@ -1,14 +1,14 @@
 # Lumière — Counter Studio
 
-A sleek number counter animation generator. Configure animated counters with custom styling, easing curves, and export them as MP4 videos — all in the browser.
+A sleek number counter animation generator. Configure animated counters with custom styling, easing curves, and export them as MP4 videos all in the browser.
 
 ## Features
 
-- **Animated number counters** — set start/end values, prefix, suffix, and decimal precision
-- **Multiple easing functions** — Linear, Ease In/Out, Overshoot, Bounce, Elastic with live curve preview
-- **Full styling control** — custom fonts, colors, font size, background images, and canvas resolution
-- **MP4 export** — render animations using WebCodecs + mp4-muxer, no server required
-- **Live preview** — instant canvas preview with real-time playback
+- **Animated number counters** set start/end values, prefix, suffix, and decimal precision
+- **Multiple easing functions** Linear, Ease In/Out, Overshoot, Bounce, Elastic with live curve preview
+- **Full styling control** custom fonts, colors, font size, background images, and canvas resolution
+- **MP4 export** render animations using WebCodecs + mp4-muxer, no server required
+- **Live preview** instant canvas preview with real-time playback
 
 ## Tech Stack
 
