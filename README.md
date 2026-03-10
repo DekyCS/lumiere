@@ -1,4 +1,4 @@
-# Lumière — Counter Studio
+# Lumière
 
 A sleek number counter animation generator. Configure animated counters with custom styling, easing curves, and export them as MP4 videos all in the browser.
 
